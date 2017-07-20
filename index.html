@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <title>对话框</title>
+    <script src="index.js"></script>
+    <style>
+      *{ box-sizing: border-box; }
+      [role=alert],[role=confirm]{ display: none; position: fixed; left: 0; right: 0; top: 0; bottom: 0; background: rgba(0, 0, 0, 0); transition: all .4s ease;}
+      [role=alert] [role=alert-body],[role=confirm] [role=confirm-body]{ width: 300px; min-height: 30px; background: #fff; border-radius: 5px; position: absolute; left: 50%; margin-left: -150px; top: 50%; margin-top: -15px; opacity: 0;}
+      [role=alert]{}
+      [role=alert] [role=alert-body]{ padding: 10px; transform: scale(.6); opacity: 0; transition: all .4s ease;}
+      [role=alert].running, [role=confirm].running{ background: rgba(0, 0, 0, .7);}
+      [role=alert].running [role=alert-body]{ transform: scale(1); opacity: 1;}
+      [role=confirm]{}
+      [role=confirm] [role=confirm-body]{ transform: translateY(-80px); transition: all .4s ease;}
+      [role=confirm] [role=confirm-con]{ padding: 10px; text-align: center; line-height: 1.8;}
+      [role=confirm] [role=confirm-action]{ overflow: hidden; border-top: 1px solid #bdbdbd;}
+      [role=confirm] .unitAction{ float: left; width: 50%; text-align: center; line-height: 30px; border-right: 1px solid #bdbdbd;}
+      [role=confirm] .unitAction:last-child{ border-right: 0;}
+      [role=confirm].running [role=confirm-body]{ transform: translateY(10px); opacity: 1;}
+    </style>
+  </head>
+  <body>
+    <section>
+      alert: <input name="alert" type="text" placeholder="输入提示内容" />&nbsp;&nbsp;&nbsp;&nbsp;<button onClick="alertPlay()">确定</button>
+    </section>
+    <br><br>
+    <section>
+      confirm: <input name="confirm" type="text" placeholder="输入需要确认的内容">&nbsp;&nbsp;&nbsp;&nbsp;<button onClick="confirmPlay()">确定</button>
+    </section>
+
+
+    
+    <script>
+      Dialogs.init();
+
+      function alertPlay(){
+        var _msg = document.querySelector('[name=alert]').value;
+        console.log(_msg)
+        if(!_msg){
+          _msg = '请输入提示内容';
+        }
+        Dialogs.alert(_msg, 1500);
+      }
+
+      function confirmPlay(){
+        var _msg = document.querySelector('[name=confirm]').value;
+        if(!_msg){
+          _msg = '请输入需要确认的内容信息';
+          Dialogs.alert(_msg, 1500);
+          return false;
+        }
+        Dialogs.confirm({
+          msg: _msg,
+          continueFn: function(){
+            console.log('continue ....')
+          },
+          cancelFn: function(){
+            console.log('cancel....')
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
