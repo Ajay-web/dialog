@@ -13,9 +13,9 @@ opt 必选，对象
 ```javascript
 {
   msg: '',
-  continueTxt: '',
+  continueTxt: '确认',
   continueFn: null,
-  cancelTxt: '',
+  cancelTxt: '取消',
   cancelFn: null
 }
 ```
