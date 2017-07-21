@@ -168,7 +168,7 @@
 
 
   // END==================================================================== //
-  if(typeof define === 'function' && define.amd){
+  if(typeof define === 'function' && define.cmd){
     define('', [], function(){
       return exports;
     });
